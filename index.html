@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>网格诊室</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <h1>网格诊室</h1>
+        <div class="toolbar">
+          <select id="sampleSelect"></select>
+          <button id="loadSampleBtn">载入样例</button>
+          <label class="filebtn">
+            导入 OBJ/PLY
+            <input id="fileInput" type="file" accept=".obj,.ply" hidden />
+          </label>
+          <span id="stats" class="stats"></span>
+          <span class="spacer"></span>
+          <button id="exportObjBtn">导出 OBJ</button>
+          <button id="exportPlyBtn">导出 PLY</button>
+          <button id="reverifyBtn">再导入验证</button>
+        </div>
+      </header>
+      <main class="layout">
+        <aside class="panel left">
+          <section>
+            <h2>诊断 <small id="diagCount"></small></h2>
+            <ul id="diagnosticList" class="list"></ul>
+          </section>
+          <section>
+            <h2>锁定</h2>
+            <label class="row"><input type="checkbox" id="lockSeam" /> 锁定 UV seam</label>
+            <label class="row">锁定组：<input type="text" id="lockGroups" placeholder="逗号分隔，如 junk, dupes" /></label>
+            <label class="row">区域 min：<input type="text" id="regionMin" placeholder="x,y,z" /></label>
+            <label class="row">区域 max：<input type="text" id="regionMax" placeholder="x,y,z" /></label>
+          </section>
+        </aside>
+        <section class="viewport">
+          <div class="viewtoolbar">
+            <label><input type="checkbox" id="oneRingToggle" /> 只看受影响的一环邻域</label>
+            <label><input type="checkbox" id="compareToggle" /> 比较两个修复分支</label>
+            <button id="clearSelectionBtn">清除选择</button>
+          </div>
+          <div class="canvaswrap">
+            <canvas id="gl"></canvas>
+            <canvas id="gl2" class="hidden"></canvas>
+          </div>
+          <div id="compareBar" class="comparebar hidden">
+            <select id="compareA"></select>
+            <span>⇄</span>
+            <select id="compareB"></select>
+            <span id="compareStats"></span>
+          </div>
+        </section>
+        <aside class="panel right">
+          <section>
+            <h2>修复计划</h2>
+            <div id="planHint" class="hint">点击左侧诊断以生成计划</div>
+            <ul id="planList" class="list"></ul>
+          </section>
+          <section>
+            <h2>分支与应用</h2>
+            <div class="row">
+              基于版本：<select id="baseVersion"></select>
+            </div>
+            <div class="row">
+              分支名：<input type="text" id="branchName" value="fix" />
+            </div>
+            <div class="row">
+              <button id="applyBtn" class="primary">原子应用所选计划</button>
+            </div>
+            <div id="applyResult" class="result"></div>
+          </section>
+          <section>
+            <h2>版本树</h2>
+            <ul id="versionList" class="list"></ul>
+          </section>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="/src/web/main.ts"></script>
+  </body>
+</html>
