@@ -1,0 +1,19 @@
+{
+  "name": "mesh-clinic",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "网格诊室 - 本地三维网格拓扑缺陷诊断与修复计划系统",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "~5.7.3",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  }
+}
